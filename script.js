@@ -1,61 +1,83 @@
-// Selectores
-const entrada = document.querySelector("#textareaEntrada");
-const salida = document.querySelector("#textareaSalida");
+// Selectors
+const input = document.querySelector("#inputTextarea");
+const output = document.querySelector("#outputTextarea");
 const initialOutputSection = document.getElementById("initialOutputSection");
 const outputSection = document.getElementById("outputSection");
+const capAccentsWarning = document.getElementById("warningParagraph");
+const copyButton = document.getElementById("copyButton");
 
-// Oculta div de salida al cargar el sitio
+// It hides output div on site load
 outputSection.style.display = "none";
 
-function botonEncriptar() {
-    const strEncriptado = encriptar(entrada.value);
-    if (entrada.value == "" || verificadorCaracteres(entrada.value) == false) {
+// It calls the encryptor, the text checker, and manipulates the DOM to show/hide certain elements
+function encryptButton() {
+    const encryptedString = encrypt(input.value);
+    if (input.value == "" || inputTextChecker(input.value) == false) {
         outputSection.style.display = "none";
         initialOutputSection.style.display = "flex";
+        input.focus();
     }
     else {
         initialOutputSection.style.display = "none";
         outputSection.style.display = "flex";
-        salida.value = strEncriptado;
+        output.value = encryptedString;
+        capAccentsWarning.style.color = "";
     }
 }
 
-function botonDesencriptar() {
-    const strDesencriptado = desencriptar(entrada.value);
-    if (entrada.value == "") {
+// It calls the decryptor and manipulates the DOM to show/hide certain elements
+function decryptButton() {
+    const decryptedStr = decrypt(input.value);
+    if (input.value == "") {
         outputSection.style.display = "none";
         initialOutputSection.style.display = "flex";
+        input.focus();
     }
     else {
         initialOutputSection.style.display = "none";
         outputSection.style.display = "flex";
-        salida.value = strDesencriptado;
+        output.value = decryptedStr;
     }
 }
 
-function botonCopiar() {
-    navigator.clipboard.writeText(salida.value);
+// It copies the encrypted/decrypted text and produces the transitions that communicate it to the user
+function copyButtonFunction() {
+    navigator.clipboard.writeText(output.value);
+    copyButton.style.transition = "opacity 0.8s ease-in";
+    copyButton.innerHTML = "¡Copiado!";
+    copyButton.style.color = "white";
+    copyButton.style.background = "#0A3871";
+    copyButton.style.opacity = 0;
+    
+    setTimeout(function() {
+        copyButton.style.transition = "none";
+        copyButton.innerHTML = "Copiar";
+        copyButton.style.color = "#0A3871";
+        copyButton.style.background = "";
+        copyButton.style.opacity = 1;
+    }, 800)
 }
 
-function verificadorCaracteres(strVerificando) {
-//    const caracteresPermitidos = '"' + " º¡`+´ç<,.-ª!·$%&/()='?¿^*¨>;:_\|@#~€¬[]{}abcdefghijklmnñopqrstuvwxyz";
-    const caracteresPermitidos = "! abcdefghijklmnñopqrstuvwxyz";
-    let textoValido = true
-    for (let i = 0; i < strVerificando.length; i++) {
-        if (! (caracteresPermitidos.includes(strVerificando[i]))) {
-            textoValido = false
-            entrada.value = "";
-            alert("Solo letras minúsculas y sin acentos");
+// Verify that the user has only entered lowercase letters without accents
+function inputTextChecker(verifyingStr) {
+//    const allowedCharacters = '"' + " º¡`+´ç<,.-ª!·$%&/()='?¿^*¨>;:_\|@#~€¬[]{}abcdefghijklmnñopqrstuvwxyz";
+    const allowedCharacters = "! abcdefghijklmnñopqrstuvwxyz";
+    let textValidity = true
+    for (let i = 0; i < verifyingStr.length; i++) {
+        if (! (allowedCharacters.includes(verifyingStr[i]))) {
+            textValidity = false
+            input.value = "";
+            capAccentsWarning.style.color = "red";
             break;
         }
     }
-    return textoValido;
+    return textValidity;
 }
 
-function encriptar(strParaEncriptar) {
+function encrypt(encryptingStr) {
     let encryptedStr = "";
-    for (let index = 0; index < strParaEncriptar.length; index++) {
-        const character = strParaEncriptar[index];
+    for (let index = 0; index < encryptingStr.length; index++) {
+        const character = encryptingStr[index];
         if (character == "a") {
             encryptedStr = encryptedStr + "ai";
             continue;
@@ -83,12 +105,12 @@ function encriptar(strParaEncriptar) {
     return encryptedStr;
 }
 
-function desencriptar(strParaDesencriptar) {
-    let matrizCodigo = [["ai","a"], ["enter", "e"], ["imes", "i"], ["ober", "o"], ["ufat", "u"]];
-    for (let index = 0; index < matrizCodigo.length; index++) {
-        if (strParaDesencriptar.includes(matrizCodigo[index][0])) {
-            strParaDesencriptar = strParaDesencriptar.replaceAll(matrizCodigo[index][0], matrizCodigo[index][1])
+function decrypt(decryptingStr) {
+    let decryptionCode = [["ai","a"], ["enter", "e"], ["imes", "i"], ["ober", "o"], ["ufat", "u"]];
+    for (let index = 0; index < decryptionCode.length; index++) {
+        if (decryptingStr.includes(decryptionCode[index][0])) {
+            decryptingStr = decryptingStr.replaceAll(decryptionCode[index][0], decryptionCode[index][1])
         }
     }
-    return strParaDesencriptar;
+    return decryptingStr;
 }

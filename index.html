@@ -7,30 +7,31 @@
 </head>
 <body>
     <img id="logo" src="logo.png"/>
-<main>
-    <section id="inputSection">
-        <textarea id="textareaEntrada" type="text" placeholder="Ingrese el texto aquí" autofocus></textarea>
-        <div id="warning">
-            <img id="warningImg" src="exclamation mark.png"/>
-            <p id="warningParagraph">Solo letras minúsculas y sin acentos.</p>
-        </div>
-        <div id="inputButtons">
-            <button type="button" onclick="botonEncriptar()">Encriptar</button>
-            <button type="button" onclick="botonDesencriptar()">Desencriptar</button>
-        </div>
-    </section>
-    <section id="initialOutputSection">
-        <img id="muñeco" src="muñeco.png"/>
-        
-            <p id="textoMuñecoNegrita">No se ha introducido ningún mensaje</p>
-            <p id="textoMuñecoNormal">Ingresa el texto que desees encriptar o desencriptar.</p>
-        
-    </section>
-    <section id="outputSection">
-        <textarea id="textareaSalida" type="text"></textarea></br>
-        <button id="copyButton" type="button" onclick="botonCopiar()">Copiar</button>
-    </section>
-</main>
+    
+    <main>
+        <section id="inputSection" class="sectionsBackground">
+            <textarea id="inputTextarea" class="sectionsBackground" type="text" placeholder="Ingrese el texto aquí" autofocus></textarea>
+            <div id="inputButtons" class="sectionsBackground">
+                <div id="warning" class="sectionsBackground">
+                    <img id="warningImg" class="sectionsBackground" src="exclamation mark.png"/>
+                    <p id="warningParagraph">Solo letras minúsculas y sin acentos.</p>
+                </div>
+                <button id="encryptButton" type="button" onclick="encryptButton()">Encriptar</button>
+                <button id="decryptButton" class="ARREGLAR- background" type="button" onclick="decryptButton()">Desencriptar</button>
+            </div>
+        </section>
+
+        <section id="initialOutputSection" class="sectionsBackground">
+            <img class="sectionsBackground" src="doll.png"/>
+                <p id="dollBoldText" class="sectionsBackground">No se ha introducido ningún mensaje</p>
+                <p id="dollNormalText" class="sectionsBackground">Ingresa el texto que desees encriptar o desencriptar.</p>
+        </section>
+        <section id="outputSection" class="sectionsBackground">
+            <textarea id="outputTextarea" class="sectionsBackground" type="text" readonly></textarea></br>
+            <button id="copyButton" class="sectionsBackground" type="button" onclick="copyButtonFunction()">Copiar</button>
+        </section>
+    </main>
+    
 </body>
 <script src="script.js"></script>
 </html>
