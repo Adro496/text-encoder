@@ -44,14 +44,14 @@ function decryptButton() {
 function copyButtonFunction() {
     navigator.clipboard.writeText(output.value);
     copyButton.style.transition = "opacity 0.8s ease-in";
-    copyButton.innerHTML = "¡Copiado!";
+    copyButton.innerHTML = "Copied!";
     copyButton.style.color = "white";
     copyButton.style.background = "#0A3871";
     copyButton.style.opacity = 0;
     
     setTimeout(function() {
         copyButton.style.transition = "none";
-        copyButton.innerHTML = "Copiar";
+        copyButton.innerHTML = "Copy";
         copyButton.style.color = "#0A3871";
         copyButton.style.background = "";
         copyButton.style.opacity = 1;
@@ -60,7 +60,6 @@ function copyButtonFunction() {
 
 // Verify that the user has only entered lowercase letters without accents
 function inputTextChecker(verifyingStr) {
-//    const allowedCharacters = '"' + " º¡`+´ç<,.-ª!·$%&/()='?¿^*¨>;:_\|@#~€¬[]{}abcdefghijklmnñopqrstuvwxyz";
     const allowedCharacters = "! abcdefghijklmnñopqrstuvwxyz";
     let textValidity = true
     for (let i = 0; i < verifyingStr.length; i++) {
