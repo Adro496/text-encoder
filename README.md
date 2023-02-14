@@ -1,1 +1,1 @@
-# text-encryptor
+# text-encoder
