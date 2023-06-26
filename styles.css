@@ -1,6 +1,6 @@
 * {
     font-family: 'Inter', sans-serif;
-    background: #000;
+    background: #6c89ff;
 }
 
 /* It allows <main> to span the entire window */
@@ -16,7 +16,7 @@ main {
     height: 83%;
     min-height: 600px;
     min-width: 1050px;
-    background: #000000;
+    /*background: #000000;*/
 }
 
 .sectionsBackground {
