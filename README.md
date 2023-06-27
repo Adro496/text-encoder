@@ -1,1 +1,0 @@
-# ONE Text Encoder
